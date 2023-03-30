@@ -1,0 +1,59 @@
+
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dotnet.Web", "Dotnet.Web\Dotnet.Web.csproj", "{E82E34ED-6523-4D3C-8F92-BE1959F09C74}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dotnet.Web.Tests", "Dotnet.Web.Tests\Dotnet.Web.Tests.csproj", "{3C1F17D6-7B73-41C6-A71A-AF2600EEE191}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docker", "Docker", "{1C8A246A-4F78-4EF6-AC11-AEF39606EC19}"
+	ProjectSection(SolutionItems) = preProject
+		docker-compose.yml = docker-compose.yml
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dotnet.Web.Admin", "Dotnet.Web.Admin\Dotnet.Web.Admin.csproj", "{BB571BC0-A836-4A7A-B107-A9CE4C9A0AAB}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tasks", "Tasks", "{7D25F93C-9172-4416-BE68-6051466E80A5}"
+	ProjectSection(SolutionItems) = preProject
+		README.md = README.md
+		Tasks\configuration.md = Tasks\configuration.md
+		Tasks\testing.md = Tasks\testing.md
+		Tasks\docker.md = Tasks\docker.md
+		Tasks\db.md = Tasks\db.md
+		Tasks\asp-net.md = Tasks\asp-net.md
+		Tasks\rest.md = Tasks\rest.md
+		Tasks\intro.md = Tasks\intro.md
+		Tasks\loging.md = Tasks\loging.md
+		Tasks\validation.md = Tasks\validation.md
+		Tasks\bl.md = Tasks\bl.md
+		Tasks\auth.md = Tasks\auth.md
+		Tasks\ui.md = Tasks\ui.md
+		Tasks\todo.md = Tasks\todo.md
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tools", "Tools", "{74AE51D6-77C4-4E68-87F4-C5AAA7AC4AA6}"
+	ProjectSection(SolutionItems) = preProject
+		.gitlab-ci.yml = .gitlab-ci.yml
+		.editorconfig = .editorconfig
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E82E34ED-6523-4D3C-8F92-BE1959F09C74}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E82E34ED-6523-4D3C-8F92-BE1959F09C74}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E82E34ED-6523-4D3C-8F92-BE1959F09C74}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E82E34ED-6523-4D3C-8F92-BE1959F09C74}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3C1F17D6-7B73-41C6-A71A-AF2600EEE191}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3C1F17D6-7B73-41C6-A71A-AF2600EEE191}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3C1F17D6-7B73-41C6-A71A-AF2600EEE191}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3C1F17D6-7B73-41C6-A71A-AF2600EEE191}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BB571BC0-A836-4A7A-B107-A9CE4C9A0AAB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BB571BC0-A836-4A7A-B107-A9CE4C9A0AAB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BB571BC0-A836-4A7A-B107-A9CE4C9A0AAB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BB571BC0-A836-4A7A-B107-A9CE4C9A0AAB}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+	EndGlobalSection
+EndGlobal

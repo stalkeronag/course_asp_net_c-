@@ -29,8 +29,6 @@ services:
       dockerfile: Dotnet.Web/Dockerfile
     ports:
       - "5100:80"
-    environment:
-      ConnectionStrings:Default: "b"
     depends_on:
       - postgres
     links:
