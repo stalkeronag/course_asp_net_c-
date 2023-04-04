@@ -16,7 +16,6 @@ cache:
 before_script:
   - 'dotnet restore --packages $NUGET_PACKAGES_DIRECTORY'
 
-
 stages:
   - build
   - test
@@ -24,16 +23,14 @@ stages:
 build:
   stage: build
   tags:
-    - nix
-    - docker
+    - dotnet
   script:
     - 'dotnet build --no-restore'
    
 test:
   stage: test
   tags:
-    - nix
-    - docker  
+    - dotnet
   script:
     - 'cd Dotnet.Web.Tests'
     - 'dotnet test --no-restore --collect:"XPlat Code Coverage" --logger:"junit;LogFilePath=dotnet-test-result.xml"'
