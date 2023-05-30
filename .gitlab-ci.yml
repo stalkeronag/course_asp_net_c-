@@ -17,6 +17,8 @@ before_script:
   - 'dotnet restore --packages $NUGET_PACKAGES_DIRECTORY'
 
 build:
+  tags:
+     - dotnet
   script:
     - 'dotnet build --no-restore'
 
