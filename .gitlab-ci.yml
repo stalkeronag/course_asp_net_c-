@@ -22,6 +22,8 @@ stages:
 
 build:
   stage: build
+  tags:
+    - docker-dotnet
   script:
     - 'dotnet build --no-restore'
   services:
@@ -29,6 +31,8 @@ build:
    
 test:
   stage: test
+  tags:
+    - docker-dotnet
   script:
     - 'cd Dotnet.Web.Tests'
     - 'dotnet test --no-restore --collect:"XPlat Code Coverage" --logger:"junit;LogFilePath=dotnet-test-result.xml"'
