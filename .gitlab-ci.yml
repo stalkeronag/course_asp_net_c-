@@ -6,32 +6,34 @@ variables:
   NUGET_PACKAGES_DIRECTORY: '.nuget'
   SOURCE_CODE_PATH: '*/*/'
 
-cache:
-  key: "$CI_JOB_STAGE-$CI_COMMIT_REF_SLUG"
-  paths:
-    - '$SOURCE_CODE_PATH$OBJECTS_DIRECTORY/project.assets.json'
-    - '$SOURCE_CODE_PATH$OBJECTS_DIRECTORY/*.csproj.nuget.*'
-    - '$NUGET_PACKAGES_DIRECTORY'
+# cache:
+#   key: "$CI_JOB_STAGE-$CI_COMMIT_REF_SLUG"
+#   paths:
+#     - '$SOURCE_CODE_PATH$OBJECTS_DIRECTORY/project.assets.json'
+#     - '$SOURCE_CODE_PATH$OBJECTS_DIRECTORY/*.csproj.nuget.*'
+#     - '$NUGET_PACKAGES_DIRECTORY'
 
-before_script:
-  - 'dotnet restore --packages $NUGET_PACKAGES_DIRECTORY'
-
-build:
-  tags:
-     - dotnet
-  script:
-    - 'dotnet build --no-restore'
-
-# stages:
-#   - build
-#   - test
+# before_script:
+#   - 'dotnet restore --packages $NUGET_PACKAGES_DIRECTORY'
 
 # build:
-#   stage: build
 #   tags:
-#     - dotnet
+#      - dotnet
 #   script:
 #     - 'dotnet build --no-restore'
+
+stages:
+  - build
+  - test
+
+build:
+  stage: build
+  tags:
+    - dotnet
+  script:
+    - 'dotnet build --no-restore'
+  services:
+    - docker:dind
    
 # test:
 #   stage: test
