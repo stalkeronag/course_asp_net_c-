@@ -6,15 +6,15 @@ variables:
   NUGET_PACKAGES_DIRECTORY: '.nuget'
   SOURCE_CODE_PATH: '*/*/'
 
-# cache:
-#   key: "$CI_JOB_STAGE-$CI_COMMIT_REF_SLUG"
-#   paths:
-#     - '$SOURCE_CODE_PATH$OBJECTS_DIRECTORY/project.assets.json'
-#     - '$SOURCE_CODE_PATH$OBJECTS_DIRECTORY/*.csproj.nuget.*'
-#     - '$NUGET_PACKAGES_DIRECTORY'
+cache:
+  key: "$CI_JOB_STAGE-$CI_COMMIT_REF_SLUG"
+  paths:
+    - '$SOURCE_CODE_PATH$OBJECTS_DIRECTORY/project.assets.json'
+    - '$SOURCE_CODE_PATH$OBJECTS_DIRECTORY/*.csproj.nuget.*'
+    - '$NUGET_PACKAGES_DIRECTORY'
 
-# before_script:
-#   - 'dotnet restore --packages $NUGET_PACKAGES_DIRECTORY'
+before_script:
+  - 'dotnet restore --packages $NUGET_PACKAGES_DIRECTORY'
 
 # build:
 #   tags:
@@ -28,6 +28,8 @@ stages:
 
 build:
   stage: build
+  # before_script:
+  #   - 'dotnet restore --packages $NUGET_PACKAGES_DIRECTORY'
   script:
     - 'dotnet build --no-restore'
   services:
