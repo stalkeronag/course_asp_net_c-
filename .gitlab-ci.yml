@@ -16,39 +16,29 @@ cache:
 before_script:
   - 'dotnet restore --packages $NUGET_PACKAGES_DIRECTORY'
 
-# build:
-#   tags:
-#      - dotnet
-#   script:
-#     - 'dotnet build --no-restore'
-
 stages:
   - build
   - test
 
 build:
   stage: build
-  # before_script:
-  #   - 'dotnet restore --packages $NUGET_PACKAGES_DIRECTORY'
   script:
     - 'dotnet build --no-restore'
   services:
     - docker:dind
    
-# test:
-#   stage: test
-#   tags:
-#     - dotnet
-#   script:
-#     - 'cd Dotnet.Web.Tests'
-#     - 'dotnet test --no-restore --collect:"XPlat Code Coverage" --logger:"junit;LogFilePath=dotnet-test-result.xml"'
-#   coverage: '/Line coverage: \d+/'     
-#   artifacts:
-#     paths:
-#       - ./Dotnet.Web.Tests/TestResults/*/coverage.cobertura.xml
-#       - ./Dotnet.Web.Tests/dotnet-test-result.xml
-#     reports:
-#       junit: ./Dotnet.Web.Tests/dotnet-test-result.xml
-#       coverage_report:
-#         coverage_format: cobertura
-#         path: './Dotnet.Web.Tests/TestResults/*/coverage.cobertura.xml'     
+test:
+  stage: test
+  script:
+    - 'cd Dotnet.Web.Tests'
+    - 'dotnet test --no-restore --collect:"XPlat Code Coverage" --logger:"junit;LogFilePath=dotnet-test-result.xml"'
+  coverage: '/Line coverage: \d+/'     
+  artifacts:
+    paths:
+      - ./Dotnet.Web.Tests/TestResults/*/coverage.cobertura.xml
+      - ./Dotnet.Web.Tests/dotnet-test-result.xml
+    reports:
+      junit: ./Dotnet.Web.Tests/dotnet-test-result.xml
+      coverage_report:
+        coverage_format: cobertura
+        path: './Dotnet.Web.Tests/TestResults/*/coverage.cobertura.xml'     
