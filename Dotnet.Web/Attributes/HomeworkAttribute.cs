@@ -1,6 +1,7 @@
 using System.Reflection;
+using Xunit;
 
-namespace Dotnet.Web.Tests.Attributes;
+namespace Dotnet.Web.Attributes;
 
 public class HomeworkAttribute : FactAttribute
 {

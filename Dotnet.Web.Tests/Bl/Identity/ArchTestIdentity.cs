@@ -1,7 +1,7 @@
 using ArchUnitNET.Domain;
 using ArchUnitNET.Loader;
 using ArchUnitNET.xUnit;
-using Dotnet.Web.Tests.Attributes;
+using Dotnet.Web.Attributes;
 using static ArchUnitNET.Fluent.ArchRuleDefinition;
 
 namespace Dotnet.Web.Tests.Bl.Identity;

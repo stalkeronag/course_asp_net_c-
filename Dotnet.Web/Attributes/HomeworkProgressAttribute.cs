@@ -1,4 +1,4 @@
-namespace Dotnet.Web.Tests.Attributes;
+namespace Dotnet.Web.Attributes;
 
 [AttributeUsage(AttributeTargets.Assembly)]
 public class HomeworkProgressAttribute : Attribute

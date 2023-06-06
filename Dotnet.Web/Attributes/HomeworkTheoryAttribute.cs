@@ -1,4 +1,6 @@
-namespace Dotnet.Web.Tests.Attributes;
+using Xunit;
+
+namespace Dotnet.Web.Attributes;
 
 public class HomeworkTheoryAttribute: TheoryAttribute
 {

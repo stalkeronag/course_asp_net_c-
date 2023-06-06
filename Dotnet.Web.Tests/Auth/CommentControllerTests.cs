@@ -1,8 +1,7 @@
-using Dotnet.Web.Controllers;
+using Dotnet.Web.Attributes;
 using Dotnet.Web.Data;
 using Dotnet.Web.Dto;
 using Dotnet.Web.Refit;
-using Dotnet.Web.Tests.Attributes;
 using Dotnet.Web.Tests.Shared;
 using FluentAssertions;
 

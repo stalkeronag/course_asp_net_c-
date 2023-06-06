@@ -1,4 +1,4 @@
-using Dotnet.Web.Tests.Attributes;
+using Dotnet.Web.Attributes;
 using YamlDotNet.Serialization;
 using YamlDotNet.Serialization.NamingConventions;
 

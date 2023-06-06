@@ -1,5 +1,5 @@
-﻿using Dotnet.Web.Data;
-using Dotnet.Web.Tests.Attributes;
+﻿using Dotnet.Web.Attributes;
+using Dotnet.Web.Data;
 using Dotnet.Web.Tests.Shared;
 using FluentAssertions;
 using Microsoft.AspNetCore.Hosting;
