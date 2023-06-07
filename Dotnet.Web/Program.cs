@@ -28,7 +28,9 @@ static void ConfigureServices(WebApplicationBuilder builder)
 
 static void ConfigureIdentity(WebApplicationBuilder builder)
 {
-    
+    builder.Services
+        .AddIdentity<User, UserRole>()
+        .AddEntityFrameworkStores<AppDbContext>();   
 }
 
 static void ConfigureDb(WebApplicationBuilder builder)
