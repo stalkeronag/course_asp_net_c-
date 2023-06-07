@@ -1,3 +1,6 @@
+using System.Reflection;
+using Dotnet.Web.Attributes;
+using Dotnet.Web.Controllers;
 using Dotnet.Web.Data;
 using Dotnet.Web.Models;
 using Microsoft.AspNetCore.Identity;
@@ -25,7 +28,9 @@ static void ConfigureServices(WebApplicationBuilder builder)
 
 static void ConfigureIdentity(WebApplicationBuilder builder)
 {
-    
+    builder.Services
+        .AddIdentity<User, UserRole>()
+        .AddEntityFrameworkStores<AppDbContext>();   
 }
 
 static void ConfigureDb(WebApplicationBuilder builder)
@@ -75,7 +80,14 @@ static void RunApp(WebApplicationBuilder builder)
     app.UseAuthorization();
     app.MapControllers();
 
-    InitDb(app);
+    var hw = typeof(DotnetControllerBase)
+        .Assembly
+        .GetCustomAttribute<HomeworkProgressAttribute>()?.Number;
+    if (hw > 4)
+    {
+        InitDb(app);
+    }
+   
 
     app.Run();
 }

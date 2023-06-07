@@ -1,6 +1,6 @@
-﻿using Dotnet.Web.Exceptions;
+﻿using Dotnet.Web.Attributes;
+using Dotnet.Web.Exceptions;
 using Dotnet.Web.Models;
-using Dotnet.Web.Tests.Attributes;
 using Dotnet.Web.Tests.Shared;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;

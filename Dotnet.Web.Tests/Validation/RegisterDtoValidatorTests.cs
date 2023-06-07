@@ -1,6 +1,6 @@
 ﻿using Dotnet.Web.Admin.Dto;
 using Dotnet.Web.Admin.Validation;
-using Dotnet.Web.Tests.Attributes;
+using Dotnet.Web.Attributes;
 using FluentValidation;
 using FluentValidation.TestHelper;
 

@@ -1,4 +1,4 @@
-namespace Dotnet.Web.Tests.Attributes;
+namespace Dotnet.Web.Attributes;
 
 public enum Homeworks : byte
 {

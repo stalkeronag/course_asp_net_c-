@@ -1,5 +1,5 @@
+using Dotnet.Web.Attributes;
 using Dotnet.Web.Models;
-using Dotnet.Web.Tests.Attributes;
 using Dotnet.Web.Validation;
 using FluentValidation.TestHelper;
 

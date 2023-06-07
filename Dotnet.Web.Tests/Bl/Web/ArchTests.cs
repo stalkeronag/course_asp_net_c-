@@ -1,10 +1,9 @@
 using ArchUnitNET.Domain;
 using ArchUnitNET.Loader;
 using ArchUnitNET.xUnit;
-using Dotnet.Web.Controllers;
+using Dotnet.Web.Attributes;
 using Dotnet.Web.Data;
 using Dotnet.Web.Refit;
-using Dotnet.Web.Tests.Attributes;
 using static ArchUnitNET.Fluent.ArchRuleDefinition;
 
 namespace Dotnet.Web.Tests.Bl.Web;

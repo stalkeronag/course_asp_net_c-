@@ -1,7 +1,7 @@
 using System.Net.Http.Json;
 using System.Text.Json;
+using Dotnet.Web.Attributes;
 using Dotnet.Web.Models;
-using Dotnet.Web.Tests.Attributes;
 using Dotnet.Web.Tests.Shared;
 using FluentAssertions;
 using Microsoft.AspNetCore.Mvc.Testing;
