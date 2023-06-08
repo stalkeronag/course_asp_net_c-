@@ -43,7 +43,7 @@ public class OrderControllerTests : WebApplicationFactoryTestsBase<IOrderControl
         Assert.True(is401);
     }
     
-    [Homework(Homeworks.Data)]
+    [Homework(Homeworks.Auth)]
     public async Task Get_ShouldNotBeEmpty()
     {
         await LoginAsAdminAsync();
@@ -58,7 +58,7 @@ public class OrderControllerTests : WebApplicationFactoryTestsBase<IOrderControl
         order.Should().NotBeNull();
     }
     
-    [Homework(Homeworks.Data)]
+    [Homework(Homeworks.Auth)]
     public async Task MoveStatus_ShouldNotBeEmpty()
     {
         await LoginAsAdminAsync();
@@ -74,7 +74,7 @@ public class OrderControllerTests : WebApplicationFactoryTestsBase<IOrderControl
         order.Should().NotBeNull();
     }
     
-    [Homework(Homeworks.Data)]
+    [Homework(Homeworks.Auth)]
     public async Task UpdateCart_ShouldAddCorrectData()
     {
         await LoginAsAdminAsync();

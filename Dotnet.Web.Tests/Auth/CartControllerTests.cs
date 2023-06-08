@@ -44,7 +44,7 @@ public class CartControllerTests : WebApplicationFactoryTestsBase<ICartControlle
         return Task.CompletedTask;
     }
     
-    [Homework(Homeworks.Data)]
+    [Homework(Homeworks.Auth)]
     public async Task AddToCart_ShouldNotBeEmpty()
     {
         await LoginAsAdminAsync();
@@ -58,7 +58,7 @@ public class CartControllerTests : WebApplicationFactoryTestsBase<ICartControlle
         cart.Should().NotBeNull();
     }
     
-    [Homework(Homeworks.Data)]
+    [Homework(Homeworks.Auth)]
     public async Task GetCurrentCart_ShouldNotBeEmpty()
     {
         await LoginAsAdminAsync();
@@ -68,7 +68,7 @@ public class CartControllerTests : WebApplicationFactoryTestsBase<ICartControlle
         cart.Should().NotBeNull();
     }
     
-    [Homework(Homeworks.Data)]
+    [Homework(Homeworks.Auth)]
     public async Task CleanCart_ShouldNotBeEmpty()
     {
         await LoginAsAdminAsync();
@@ -82,7 +82,7 @@ public class CartControllerTests : WebApplicationFactoryTestsBase<ICartControlle
         cart.Products.Should().BeEmpty();
     }
     
-    [Homework(Homeworks.Data)]
+    [Homework(Homeworks.Auth)]
     public async Task AddToCart_ShouldAddCorrectData()
     {
         await LoginAsAdminAsync();
