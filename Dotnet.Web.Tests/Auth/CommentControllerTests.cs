@@ -31,7 +31,7 @@ public class CommentControllerTests : WebApplicationFactoryTestsBase<ICommentCon
         return Task.CompletedTask;
     }
     
-    [Homework(Homeworks.Data)]
+    [Homework(Homeworks.Auth)]
     public async Task Get_ShouldNotBeEmpty()
     {
         await LoginAsAdminAsync();
@@ -50,7 +50,7 @@ public class CommentControllerTests : WebApplicationFactoryTestsBase<ICommentCon
         comment.Should().NotBeNull();
     }
     
-    [Homework(Homeworks.Data)]
+    [Homework(Homeworks.Auth)]
     public async Task AddComment_ShouldAddCorrectData()
     {
         await LoginAsAdminAsync();
