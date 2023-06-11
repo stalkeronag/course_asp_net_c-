@@ -23,14 +23,14 @@ stages:
 build:
   stage: build
   tags:
-    - dotnet-course
+    - dotnet
   script:
     - 'dotnet build --no-restore'
    
 test:
   stage: test
   tags:
-    - dotnet-course
+    - dotnet
   script:
     - 'cd Dotnet.Web.Tests'
     - 'dotnet test --no-restore --collect:"XPlat Code Coverage" --logger:"junit;LogFilePath=dotnet-test-result.xml"'
