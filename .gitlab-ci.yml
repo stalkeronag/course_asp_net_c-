@@ -26,8 +26,6 @@ build:
     - dotnet-course
   script:
     - 'dotnet build --no-restore'
-  services:
-    - docker:dind
    
 test:
   stage: test
