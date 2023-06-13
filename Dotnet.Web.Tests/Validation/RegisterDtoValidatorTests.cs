@@ -1,7 +1,6 @@
-﻿using Dotnet.Web.Admin.Dto;
-using Dotnet.Web.Admin.Validation;
+﻿using Dotnet.Web.Dto;
+using Dotnet.Web.Validation;
 using Dotnet.Web.Attributes;
-using FluentValidation;
 using FluentValidation.TestHelper;
 
 namespace Dotnet.Web.Tests.Validation;
