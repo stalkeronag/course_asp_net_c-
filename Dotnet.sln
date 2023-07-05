@@ -26,7 +26,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tasks", "Tasks", "{7D25F93C
 		Tasks\bl.md = Tasks\bl.md
 		Tasks\auth.md = Tasks\auth.md
 		Tasks\ui.md = Tasks\ui.md
-		Tasks\todo.md = Tasks\todo.md
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tools", "Tools", "{74AE51D6-77C4-4E68-87F4-C5AAA7AC4AA6}"
