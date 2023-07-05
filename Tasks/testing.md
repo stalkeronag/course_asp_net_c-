@@ -20,7 +20,7 @@
 
 ### Инструкция
 
-- Перейдите в ветку `testing`.
+- Создайте новую ветку.
 - Добавьте проект `Dotnet.Intro.Tests`. На этот раз [выберите тип проекта](https://xunit.net/docs/getting-started/netcore/visual-studio) `xUnit Test Project`, а не `Console Application`.
 - Создайте класс теста `CalculatorTests` и напишите тесты, соблюдая [AAA-нотацию](https://habr.com/ru/post/169381/).
 - С помощью [Coverlet](https://github.com/coverlet-coverage/coverlet) или [dotCover](https://www.jetbrains.com/dotcover/) (доступен в студенческой подписке для VS и Rider) убедитесь, что добились 100% покрытия кода класса `Calcualtor`.

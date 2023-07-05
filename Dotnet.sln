@@ -34,6 +34,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tools", "Tools", "{74AE51D6
 		.gitlab-ci.yml = .gitlab-ci.yml
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dotnet.Console", "Dotnet.Console\Dotnet.Console.csproj", "{1C731143-3827-4E41-A75F-470B305A98A2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -52,6 +54,10 @@ Global
 		{BB571BC0-A836-4A7A-B107-A9CE4C9A0AAB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BB571BC0-A836-4A7A-B107-A9CE4C9A0AAB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BB571BC0-A836-4A7A-B107-A9CE4C9A0AAB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1C731143-3827-4E41-A75F-470B305A98A2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1C731143-3827-4E41-A75F-470B305A98A2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1C731143-3827-4E41-A75F-470B305A98A2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1C731143-3827-4E41-A75F-470B305A98A2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 	EndGlobalSection
