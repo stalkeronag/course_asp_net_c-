@@ -26,7 +26,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tasks", "Tasks", "{7D25F93C
 		Tasks\bl.md = Tasks\bl.md
 		Tasks\auth.md = Tasks\auth.md
 		Tasks\ui.md = Tasks\ui.md
-		Tasks\todo.md = Tasks\todo.md
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tools", "Tools", "{74AE51D6-77C4-4E68-87F4-C5AAA7AC4AA6}"
@@ -34,7 +33,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tools", "Tools", "{74AE51D6
 		.gitlab-ci.yml = .gitlab-ci.yml
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dotnet.Console", "Dotnet.Console\Dotnet.Console.csproj", "{1C731143-3827-4E41-A75F-470B305A98A2}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dotnet.Intro", "Dotnet.Intro\Dotnet.Intro.csproj", "{1C731143-3827-4E41-A75F-470B305A98A2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

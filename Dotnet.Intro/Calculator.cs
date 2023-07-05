@@ -1,4 +1,4 @@
-﻿namespace Dotnet.Console;
+﻿namespace Dotnet.Intro;
 
 public class Calculator
 {
