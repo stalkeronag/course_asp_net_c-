@@ -44,6 +44,10 @@ public class Calculator
 
     public float Div(float x, float y)
     {
+        if (y == 0)
+        {
+            throw new DivideByZeroException();
+        }
         return x / y;
     }
 }

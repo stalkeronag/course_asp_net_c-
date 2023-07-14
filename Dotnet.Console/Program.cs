@@ -91,7 +91,7 @@ namespace Dotnet.Console
                 System.Console.WriteLine(calc.Calculate(operandOne, operation, operandTwo));
                 return 0;
             }
-            catch (Exception)
+            catch (DivideByZeroException)
             {
                 return -1;
             }
