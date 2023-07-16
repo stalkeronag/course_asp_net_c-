@@ -2,11 +2,52 @@
 
 public class Calculator
 {
-    public float Add(float x, float y) => throw new NotImplementedException();
+    public float Calculate(float operandOne, char operation, float operandTwo)
+    {
+        try
+        {
+            switch (operation)
+            {
+                case '+':
+                    return Add(operandOne, operandTwo);
+                case '-':
+                    return Sub(operandOne, operandTwo);
+                case '*':
+                    return Mul(operandOne, operandTwo);
+                case '/':
+                    return Div(operandOne, operandTwo);
+                default:
+                    break;
+            }
+            return -1;
+        }
+        catch (Exception)
+        {
+            throw new DivideByZeroException();
+        }
+    }
 
-    public float Sub(float x, float y) => throw new NotImplementedException();
+    public float Add(float x, float y)
+    {
+        return x + y;
+    }
 
-    public float Mul(float x, float y) => throw new NotImplementedException();
+    public float Sub(float x, float y)
+    {
+        return x - y;
+    }
 
-    public float Div(float x, float y) => throw new NotImplementedException();
+    public float Mul(float x, float y)
+    {
+        return x * y;
+    }
+
+    public float Div(float x, float y)
+    {
+        if (y == 0)
+        {
+            throw new DivideByZeroException();
+        }
+        return x / y;
+    }
 }
