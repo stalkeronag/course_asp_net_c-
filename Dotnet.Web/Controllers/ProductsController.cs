@@ -18,7 +18,7 @@ namespace Dotnet.Web.Controllers
         [ProducesResponseType(typeof(Product[]), 200)]
         public IActionResult GetProducts(int Take, int page)
         {
-            return Ok(context.Products.ToArray());
+            return Ok(context.Products.Skip(page).Take(Take).ToArray());
         }
 
         [HttpGet("{productId}/comments")]
