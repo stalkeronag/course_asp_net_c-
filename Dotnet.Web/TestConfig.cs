@@ -1,3 +1,3 @@
 using Dotnet.Web.Attributes;
 
-[assembly: HomeworkProgress(5)]
+[assembly: HomeworkProgress(6)]
