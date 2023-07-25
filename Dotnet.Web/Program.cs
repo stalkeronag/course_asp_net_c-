@@ -5,7 +5,7 @@ using Dotnet.Web.Data;
 using Dotnet.Web.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-
+using Microsoft.Extensions.Configuration;
 static void ConfigureAuth(WebApplicationBuilder builder)
 {
 }
@@ -43,7 +43,22 @@ static void ConfigureIdentity(WebApplicationBuilder builder)
 
 static void ConfigureDb(WebApplicationBuilder builder)
 {
-    builder.Services.AddDbContext<AppDbContext>(options => options.ConfigureConnectionString(builder.Environment));
+    var env = builder.Environment;
+    if ( env.IsDevelopment() || env.IsProduction())
+    {
+        string connectionString = builder.Configuration.GetValue<string>("ConnectionStrings:Default");
+        builder.Services.AddDbContext<AppDbContext>((sp, options) =>
+        {
+            options.UseNpgsql(connectionString);
+        });
+    }
+    else if (env.IsEnvironment("Test"))
+    {
+        builder.Services.AddDbContext<AppDbContext>(options =>
+        {
+            options.ConfigureConnectionString(env);
+        });
+    }
     builder.Services.AddScoped<DbContext>(x => x.GetRequiredService<AppDbContext>());
 }
 
