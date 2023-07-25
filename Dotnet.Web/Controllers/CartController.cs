@@ -1,13 +1,15 @@
-﻿using Dotnet.Web.Dto;
+﻿using Dotnet.Web.Data;
+using Dotnet.Web.Dto;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Dotnet.Web.Controllers
 {
     public class CartController : DotnetControllerBase
     {
-        public CartController() 
+        private readonly AppDbContext context;
+        public CartController(AppDbContext context) 
         {
-            
+            this.context = context;
         }
 
         [HttpGet]

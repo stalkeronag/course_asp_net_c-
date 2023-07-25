@@ -43,8 +43,8 @@ static void ConfigureIdentity(WebApplicationBuilder builder)
 
 static void ConfigureDb(WebApplicationBuilder builder)
 {
-    builder.Services.AddDbContext<AppDbContext>();
-        builder.Services.AddScoped<DbContext>(x => x.GetRequiredService<AppDbContext>());
+    builder.Services.AddDbContext<AppDbContext>(options => options.ConfigureConnectionString(builder.Environment));
+    builder.Services.AddScoped<DbContext>(x => x.GetRequiredService<AppDbContext>());
 }
 
 static void ConfigureLogger(WebApplicationBuilder builder)
@@ -53,14 +53,14 @@ static void ConfigureLogger(WebApplicationBuilder builder)
 
 static void InitDb(WebApplication app)
 {
-    if(bool.TryParse(app.Configuration["Database:SkipInitialization"], out var skip))
+    if (bool.TryParse(app.Configuration["Database:SkipInitialization"], out var skip))
     {
         if (skip)
         {
             return;
         }
     }
-    
+
     using var serviceScope = app.Services.GetRequiredService<IServiceScopeFactory>().CreateScope();
     var context = serviceScope.ServiceProvider.GetRequiredService<AppDbContext>();
     if (context.Database.IsRelational())

@@ -1,4 +1,5 @@
-﻿using Dotnet.Web.Dto;
+﻿using Dotnet.Web.Data;
+using Dotnet.Web.Dto;
 using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel.DataAnnotations;
 
@@ -6,6 +7,13 @@ namespace Dotnet.Web.Controllers
 {
     public class UsersController : DotnetControllerBase
     {
+        private readonly AppDbContext context;
+
+        public UsersController(AppDbContext context) 
+        {
+            this.context = context;
+        }
+
         [HttpGet]
         [ProducesResponseType(typeof(UserDto), 200)]
         public IActionResult GetUsers()
