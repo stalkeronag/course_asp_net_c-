@@ -53,14 +53,14 @@ static void ConfigureLogger(WebApplicationBuilder builder)
 
 static void InitDb(WebApplication app)
 {
-    //if(bool.TryParse(app.Configuration["Database:SkipInitialization"], out var skip))
-    //{
-    //    if (skip)
-    //    {
-    //        return;
-    //    }
-    //}
-    
+    if (bool.TryParse(app.Configuration["Database:SkipInitialization"], out var skip))
+    {
+        if (skip)
+        {
+            return;
+        }
+    }
+
     using var serviceScope = app.Services.GetRequiredService<IServiceScopeFactory>().CreateScope();
     var context = serviceScope.ServiceProvider.GetRequiredService<AppDbContext>();
     if (context.Database.IsRelational())
