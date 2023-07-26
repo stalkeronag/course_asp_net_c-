@@ -30,10 +30,10 @@ services:
     ports:
       - "5100:80"
     depends_on:
-      - postgres
+      - dotnet-postgres
     links:
-      - postgres
-      - dotnet_seq
+      - dotnet-postgres
+      - dotnet-seq
   
   dotnet-web-admin:
      image: dotnet-web-admin
@@ -43,7 +43,7 @@ services:
      ports:
        - "5101:80"
      depends_on:
-       - postgres
+       - dotnet-postgres
        - dotnet-web
      links:
-       - postgres
+       - dotnet-postgres
