@@ -23,6 +23,8 @@ services:
       - "5432:5432"
       
   dotnet-web:
+    environment:
+      ConnectionStrings:Default: "Host=localhost;Port=5432;Database=kaidb;Username=admin;Password=admin"
     image: dotnet-web
     build:
       context: .

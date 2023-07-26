@@ -61,7 +61,11 @@ static void ConfigureDb(WebApplicationBuilder builder)
     }
     else if (env.IsProduction())
     {
-        
+        string connectionString = builder.Configuration.GetValue<string>("ConnectionStrings:Default");
+        builder.Services.AddDbContext<AppDbContext>((sp, options) =>
+        {
+            options.UseNpgsql(connectionString);
+        });
     }
     builder.Services.AddScoped<DbContext>(x => x.GetRequiredService<AppDbContext>());
 }
