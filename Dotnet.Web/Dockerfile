@@ -12,7 +12,6 @@ WORKDIR "/src/Dotnet.Web"
 RUN dotnet build "Dotnet.Web.csproj" -c Release -o /app/build
 
 FROM build AS publish
-WORKDIR "/src/Dotnet.Web"
 RUN dotnet publish "Dotnet.Web.csproj" -c Release -o /app/publish
 
 FROM base AS final
