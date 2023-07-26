@@ -23,9 +23,9 @@ services:
       - "5432:5432"
       
   dotnet-web:
-    environment:
-      ConnectionStrings:Default: "Host=0.0.0.0;Port=5432;Database=kaidb;Username=admin;Password=admin"
     image: dotnet-web
+    environment:
+       ConnectionStrings:Default: "Host=172.17.0.1,Port=5432;Database=kaidb;Username=admin;Password=admin"
     build:
       context: .
       dockerfile: Dotnet.Web/Dockerfile
