@@ -27,8 +27,8 @@ static void ConfigureServices(WebApplicationBuilder builder)
     builder.Services.AddSwaggerGen(options => 
                 options.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo()
                 {
-                    Title = "Добро пожаловать на курс по ASP.NET Core!",
-                    Description = "<p>Этот курс предназначен для тех, кто хочет освоить разработку веб-приложений с использованием популярного фреймворка ASP.NET Core.</p><p>Вы узнаете, как использовать ASP.NET Core для создания веб-приложений, начиная с установки и настройки проекта и заканчивая развертыванием приложения на хостинге.Вы также познакомитесь с основными концепциями фреймворканаучитесь работать с базами данных, аутентификацией, авторизацией и многим другим.</p><p>Курс поможет вам улучшить свои навыки и расширить кругозор в области веб-разработки.Так что давайте начнем и посмотрим, что может предложить ASP.NET Core для вашего следующего проекта!</p>",
+                    Title = "Р”РѕР±СЂРѕ РїРѕР¶Р°Р»РѕРІР°С‚СЊ РЅР° РєСѓСЂСЃ РїРѕ ASP.NET Core!",
+                    Description = "<p>Р­С‚РѕС‚ РєСѓСЂСЃ РїСЂРµРґРЅР°Р·РЅР°С‡РµРЅ РґР»СЏ С‚РµС…, РєС‚Рѕ С…РѕС‡РµС‚ РѕСЃРІРѕРёС‚СЊ СЂР°Р·СЂР°Р±РѕС‚РєСѓ РІРµР±-РїСЂРёР»РѕР¶РµРЅРёР№ СЃ РёСЃРїРѕР»СЊР·РѕРІР°РЅРёРµРј РїРѕРїСѓР»СЏСЂРЅРѕРіРѕ С„СЂРµР№РјРІРѕСЂРєР° ASP.NET Core.</p><p>Р’С‹ СѓР·РЅР°РµС‚Рµ, РєР°Рє РёСЃРїРѕР»СЊР·РѕРІР°С‚СЊ ASP.NET Core РґР»СЏ СЃРѕР·РґР°РЅРёСЏ РІРµР±-РїСЂРёР»РѕР¶РµРЅРёР№, РЅР°С‡РёРЅР°СЏ СЃ СѓСЃС‚Р°РЅРѕРІРєРё Рё РЅР°СЃС‚СЂРѕР№РєРё РїСЂРѕРµРєС‚Р° Рё Р·Р°РєР°РЅС‡РёРІР°СЏ СЂР°Р·РІРµСЂС‚С‹РІР°РЅРёРµРј РїСЂРёР»РѕР¶РµРЅРёСЏ РЅР° С…РѕСЃС‚РёРЅРіРµ.Р’С‹ С‚Р°РєР¶Рµ РїРѕР·РЅР°РєРѕРјРёС‚РµСЃСЊ СЃ РѕСЃРЅРѕРІРЅС‹РјРё РєРѕРЅС†РµРїС†РёСЏРјРё С„СЂРµР№РјРІРѕСЂРєР°РЅР°СѓС‡РёС‚РµСЃСЊ СЂР°Р±РѕС‚Р°С‚СЊ СЃ Р±Р°Р·Р°РјРё РґР°РЅРЅС‹С…, Р°СѓС‚РµРЅС‚РёС„РёРєР°С†РёРµР№, Р°РІС‚РѕСЂРёР·Р°С†РёРµР№ Рё РјРЅРѕРіРёРј РґСЂСѓРіРёРј.</p><p>РљСѓСЂСЃ РїРѕРјРѕР¶РµС‚ РІР°Рј СѓР»СѓС‡С€РёС‚СЊ СЃРІРѕРё РЅР°РІС‹РєРё Рё СЂР°СЃС€РёСЂРёС‚СЊ РєСЂСѓРіРѕР·РѕСЂ РІ РѕР±Р»Р°СЃС‚Рё РІРµР±-СЂР°Р·СЂР°Р±РѕС‚РєРё.РўР°Рє С‡С‚Рѕ РґР°РІР°Р№С‚Рµ РЅР°С‡РЅРµРј Рё РїРѕСЃРјРѕС‚СЂРёРј, С‡С‚Рѕ РјРѕР¶РµС‚ РїСЂРµРґР»РѕР¶РёС‚СЊ ASP.NET Core РґР»СЏ РІР°С€РµРіРѕ СЃР»РµРґСѓСЋС‰РµРіРѕ РїСЂРѕРµРєС‚Р°!</p>",
                     Version = "v1"
                 }
         ));
@@ -44,7 +44,7 @@ static void ConfigureIdentity(WebApplicationBuilder builder)
 static void ConfigureDb(WebApplicationBuilder builder)
 {
     var env = builder.Environment;
-    if ( env.IsDevelopment() || env.IsProduction())
+    if ( env.IsDevelopment())
     {
         string connectionString = builder.Configuration.GetValue<string>("ConnectionStrings:Default");
         builder.Services.AddDbContext<AppDbContext>((sp, options) =>
@@ -57,6 +57,14 @@ static void ConfigureDb(WebApplicationBuilder builder)
         builder.Services.AddDbContext<AppDbContext>(options =>
         {
             options.ConfigureConnectionString(env);
+        });
+    }
+    else if (env.IsProduction())
+    {
+        string connectionString = builder.Configuration.GetValue<string>("ConnectionStrings:Default");
+        builder.Services.AddDbContext<AppDbContext>((sp, options) =>
+        {
+            options.UseNpgsql(connectionString);
         });
     }
     builder.Services.AddScoped<DbContext>(x => x.GetRequiredService<AppDbContext>());
