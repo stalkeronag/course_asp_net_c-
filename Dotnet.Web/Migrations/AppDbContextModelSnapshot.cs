@@ -20,7 +20,7 @@ namespace Dotnet.Web.Migrations
                 .HasAnnotation("ProductVersion", "7.0.2")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
-            NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
+            modelBuilder.UseIdentityColumns();
 
             modelBuilder.Entity("Dotnet.Web.Models.Cart", b =>
                 {

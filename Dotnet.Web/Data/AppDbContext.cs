@@ -13,6 +13,7 @@ public class AppDbContext : IdentityDbContext<User, UserRole, int>
         _env = env;
     }
 
+
     public virtual DbSet<Product> Products => Set<Product>();
     
     public virtual DbSet<CartProduct> CartProducts => Set<CartProduct>();

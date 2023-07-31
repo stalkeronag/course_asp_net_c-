@@ -60,6 +60,7 @@ public static class DbSeeder
         {
             var user = new User
             {
+                Id = 2,
                 Email = _adminEmail,
                 NormalizedEmail = "ADMIN@ADMIN.COM",
                 UserName = "ADMIN",
@@ -68,7 +69,6 @@ public static class DbSeeder
                 EmailConfirmed = true,
                 PhoneNumberConfirmed = true,
             };
-
             await userManager.CreateAsync(user, _adminPassword);
             await context.SaveChangesAsync();
             var newUser = await userManager.FindByEmailAsync(_adminEmail);
@@ -84,6 +84,7 @@ public static class DbSeeder
         {
             var user = new User
             {
+                Id = 3,
                 Email = _userEmail,
                 NormalizedEmail = "USER@TEST.COM",
                 UserName = "TESTUSER",
