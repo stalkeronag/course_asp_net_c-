@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Dotnet.Web.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20230725162426_InitialCreate")]
+    [Migration("20230729192341_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -23,12 +23,12 @@ namespace Dotnet.Web.Migrations
                 .HasAnnotation("ProductVersion", "7.0.2")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
-            NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
+            modelBuilder.UseIdentityColumns();
 
             modelBuilder.Entity("Dotnet.Web.Models.Cart", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
+                        .ValueGeneratedOnAdd().UseIdentityColumn()
                         .HasColumnType("integer");
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
