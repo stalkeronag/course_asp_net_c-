@@ -13,6 +13,8 @@ public class CartService : ICartService
 
     private readonly AppDbContext context;
 
+    private readonly IOrderService orderService;
+
     public CartService(IUserService userService, AppDbContext context)
     {
         this.userService = userService;
@@ -40,12 +42,9 @@ public class CartService : ICartService
             else
             {
                 context.CartProducts.RemoveRange(cartProducts);
-                await context.SaveChangesAsync();
+                context.SaveChanges();
             }
         }
-
-        currentCart.Products = new List<CartProduct>();
-        await context.SaveChangesAsync();
     }
 
     public async Task<GetUserCartResponseDto> GetUserCart()
@@ -104,6 +103,7 @@ public class CartService : ICartService
         User user = context.Users.Where(user => user.Id == userDto.UserId).FirstOrDefault();
         Product product = context.Products.Where(product => product.Id == productId).FirstOrDefault();
         Cart currentCart = context.Carts.Where(cart => cart.UserId == user.Id).FirstOrDefault();
+
         int idCartProduct = 0;
 
         if (context.CartProducts.Count() != 0)
@@ -151,7 +151,6 @@ public class CartService : ICartService
                 await context.SaveChangesAsync();
             }
         }
-
     }
 
     private async Task<Cart> CreateCart(User user)
@@ -162,7 +161,7 @@ public class CartService : ICartService
         {
            cartId = context.Carts.Select(cart => cart.Id).Max() + 1;
         }
-
+        
         Cart newCart = new Cart()
         {
             Id = cartId,
@@ -176,5 +175,7 @@ public class CartService : ICartService
 
         return newCart;
     }
-
 }
+
+    
+

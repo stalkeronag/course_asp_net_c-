@@ -1,8 +1,8 @@
 
+using Dotnet.Web.Models;
 using Dotnet.Web.Data;
 using Dotnet.Web.Dto;
 using Dotnet.Web.Interfaces;
-using Dotnet.Web.Models;
 
 namespace Dotnet.Web.Services;
 
@@ -12,10 +12,13 @@ public class OrderService : IOrderService
 
     private readonly AppDbContext context;
 
+    private int cachedOrderId;
+
     public OrderService(IUserService userService, AppDbContext context)
     {
         this.userService = userService;
         this.context = context;
+        cachedOrderId = -1;
     }
 
     public async Task<int> CreateOrder()
@@ -66,14 +69,14 @@ public class OrderService : IOrderService
             };
                 
             generateIdOrderProduct++;
-            context.OrderProducts.Add(orderProduct);
+            await context.OrderProducts.AddAsync(orderProduct);
 
             order.Products.Add(orderProduct);
             order.Price += orderProduct.Product.Price * orderProduct.Count;
         }
-
-        context.Orders.Add(order);
+        await context.Orders.AddAsync(order);
         await context.SaveChangesAsync();
+        cachedOrderId = order.Id;
 
         return order.Id;  
 
@@ -83,39 +86,40 @@ public class OrderService : IOrderService
     {
         UserDto userDto = await userService.GetUser();
         User user = context.Users.Where(user => user.Id == userDto.UserId).FirstOrDefault();
-        Cart cartUser = context.Carts.Where(cart => cart.UserId == user.Id).First();
-        Order orderUser = context.Orders.Where(order => order.UserId == user.Id).First();
 
-        var cartsProducts = context.CartProducts.Where(cartProduct => cartProduct.Cart.Id == cartUser.Id);
-        var productsInfo = cartsProducts.Select(cartProduct => new {cartProduct.Product, cartProduct.Count}).Join(
-        context.Products,
-        cartProduct => cartProduct.Product.Id,
-        product => product.Id,
-        (cartProduct, product) => new {Count = cartProduct.Count, ProductId = product.Id , Price = product.Price ,Name = product.Name}
-        );
+        Order order = context.Orders.Where(order => order.UserId == user.Id).FirstOrDefault();
+
+        if (order == null)
+        {
+            return null;
+        }
+
+        List<ProductListDto> productListDtos = new List<ProductListDto>();
+
+        var ordersProduct = context.OrderProducts.Where(orderProduct => orderProduct.Order.Id == order.Id);
+        foreach (var orderProduct in ordersProduct)
+        {
+            Product product = context.Products.Where(product => product.Id == orderProduct.ProductId).FirstOrDefault();
+            ProductListDto productListDto = new ProductListDto()
+            {
+                ProductName = product.Name,
+                ProductId = product.Id,
+                Price = orderProduct.Product.Price,
+                Count = orderProduct.Count
+            };
+
+            productListDtos.Add(productListDto);
+        }
 
         OrderDto orderDto = new OrderDto()
         {
-            OrderId = orderUser.Id,
+            Price = order.Price,
             UserId = user.Id,
+            OrderId = order.Id,
             UserName = user.UserName,
-            Price = orderUser.Price,
-            OrderStatus = orderUser.OrderStatus,
-            Products = new List<ProductListDto>()
+            OrderStatus = order.OrderStatus,
+            Products  = productListDtos
         };
-
-        foreach (var item in productsInfo)
-        {
-            ProductListDto productListDto = new ProductListDto()
-            {
-                ProductId = item.ProductId,
-                ProductName = item.Name,
-                Price = item.Price,
-                Count = item.Count
-            };
-
-            orderDto.Products.Add(productListDto);
-        }
 
         return orderDto;
 
