@@ -2,8 +2,11 @@
 
 using Dotnet.Web.Data;
 using Dotnet.Web.Dto;
+using Dotnet.Web.Exceptions;
 using Dotnet.Web.Interfaces;
 using Dotnet.Web.Models;
+using Dotnet.Web.Validation;
+using FluentValidation;
 
 namespace Dotnet.Web.Services;
 
@@ -40,6 +43,7 @@ public class ProductService : IProductService
     public Task<Product> GetProduct(long productId)
     {
         Product product = context.Products.Where(product => product.Id == productId).FirstOrDefault();
+
         return Task.FromResult(product);
     }
 

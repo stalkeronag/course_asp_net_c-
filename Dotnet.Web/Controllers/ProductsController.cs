@@ -3,6 +3,9 @@ using Dotnet.Web.Data;
 using Dotnet.Web.Dto;
 using Dotnet.Web.Models;
 using Microsoft.AspNetCore.Mvc;
+using Dotnet.Web.Exceptions;
+using FluentValidation;
+using Dotnet.Web.Validation;
 
 namespace Dotnet.Web.Controllers
 {
@@ -13,38 +16,46 @@ namespace Dotnet.Web.Controllers
 
         private readonly ICommentService commentService;
 
-        public ProductsController(ICommentService commentService, IProductService productService)
+        private readonly AbstractValidator<Product> validatorProduct;
+
+        public ProductsController(ICommentService commentService, IProductService productService, AbstractValidator<Product> validatorProduct)
         {
             this.commentService = commentService;
             this.productService = productService;
+            this.validatorProduct = validatorProduct;    
         }
 
         [HttpGet]
-        [ProducesResponseType(typeof(Product[]), 200)]
-        public async Task<Product[]> GetProducts(int Take, int page)
+        [ProducesResponseType(typeof(IEnumerable<Product>), 200)]
+        public async Task<IEnumerable<Product>> Get([FromQuery] PagingDto paging)
         {
-            PagingDto pagingDto = new PagingDto()
-            {
-                Take = Take,
-                Page = page
-            };
-            
-            return (await productService.GetListAsync(pagingDto)).ToArray();
+           return await productService.GetListAsync(paging);
         }
 
         [HttpGet("{productId}/comments")]
-        [ProducesResponseType(typeof(CommentDto[]), 200)]
-        public async Task<CommentDto[]> GetComments(int productId)
+        [ProducesResponseType(typeof(IEnumerable<CommentDto>), 200)]
+        public async Task<IActionResult> GetComments([FromRoute] int productId)
         {
-            CommentDto[] commentDtos = (await commentService.GetComments(productId)).ToArray();
-            return commentDtos;
+            if (productId > 1000)
+            {
+                return StatusCode(422);
+            }
+
+            return Ok(await commentService.GetComments(productId));
+            
         }
 
         [HttpGet("{id}")]
         [ProducesResponseType(typeof(Product), 200)]
-        public async Task<Product> GetProduct(int id)
+        public async Task<IActionResult> Get([FromRoute] int id)
         {
-            return await productService.GetProduct(id);
+            if (id > 1000)
+            {
+                return StatusCode(422);
+            }
+
+            return Ok(await productService.GetProduct(id));
         }
+
     }
 }

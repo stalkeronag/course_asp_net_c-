@@ -13,6 +13,9 @@ using Microsoft.OpenApi.Models;
 using Dotnet.Web.Interfaces;
 using Dotnet.Web.Services;
 using Microsoft.AspNetCore.Components.RenderTree;
+using FluentValidation;
+using Dotnet.Web.Validation;
+using Dotnet.Web.Dto;
 
 static void ConfigureAuth(WebApplicationBuilder builder)
 {
@@ -84,6 +87,8 @@ static void ConfigureServices(WebApplicationBuilder builder)
     builder.Services.AddTransient<IProductService, ProductService>();
     builder.Services.AddTransient<ICartService, CartService>();
     builder.Services.AddTransient<IOrderService, OrderService>();
+    builder.Services.AddTransient<AbstractValidator<Product>, ProductValidator>();
+    builder.Services.AddTransient<AbstractValidator<AddCommentDto>, AddCommentDtoValidator>();
 }
 
 static void ConfigureIdentity(WebApplicationBuilder builder)
