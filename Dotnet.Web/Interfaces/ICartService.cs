@@ -7,4 +7,6 @@ public interface ICartService
     public Task<GetUserCartResponseDto> GetUserCart();
 
     public Task CleanCart();
+
+    public Task UpdateCart(int productId);
 }

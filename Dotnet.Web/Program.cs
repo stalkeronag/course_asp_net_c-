@@ -10,6 +10,9 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Microsoft.OpenApi.Models;
+using Dotnet.Web.Interfaces;
+using Dotnet.Web.Services;
+using Microsoft.AspNetCore.Components.RenderTree;
 
 static void ConfigureAuth(WebApplicationBuilder builder)
 {
@@ -57,7 +60,7 @@ static void ConfigureServices(WebApplicationBuilder builder)
                     BearerFormat = "JWT",
                     Description = "JWT Authorization header using the Bearer scheme."
                 });
-                options.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo()
+                options.SwaggerDoc("v1", new OpenApiInfo()
                 {
                     Title = "Добро пожаловать на курс по ASP.NET Core!",
                     Description = "<p>Этот курс предназначен для тех, кто хочет освоить разработку веб-приложений с использованием популярного фреймворка ASP.NET Core.</p><p>Вы узнаете, как использовать ASP.NET Core для создания веб-приложений, начиная с установки и настройки проекта и заканчивая развертыванием приложения на хостинге.Вы также познакомитесь с основными концепциями фреймворканаучитесь работать с базами данных, аутентификацией, авторизацией и многим другим.</p><p>Курс поможет вам улучшить свои навыки и расширить кругозор в области веб-разработки.Так что давайте начнем и посмотрим, что может предложить ASP.NET Core для вашего следующего проекта!</p>",
@@ -74,6 +77,13 @@ static void ConfigureServices(WebApplicationBuilder builder)
                     }
                 });
     });
+    builder.Services.AddHttpContextAccessor();
+    builder.Services.AddTransient<IJwtGeneratorService, JwtGeneratorService>();
+    builder.Services.AddTransient<IUserService, UserService>();
+    builder.Services.AddTransient<ICommentService, CommentService>();
+    builder.Services.AddTransient<IProductService, ProductService>();
+    builder.Services.AddTransient<ICartService, CartService>();
+    builder.Services.AddTransient<IOrderService, OrderService>();
 }
 
 static void ConfigureIdentity(WebApplicationBuilder builder)
