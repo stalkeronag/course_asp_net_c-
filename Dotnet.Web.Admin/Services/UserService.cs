@@ -1,3 +1,4 @@
+using Dotnet.Web.Admin.Data;
 using Dotnet.Web.Admin.Dto;
 using Dotnet.Web.Admin.Interfaces;
 using Dotnet.Web.Admin.Models;
@@ -6,9 +7,18 @@ namespace Dotnet.Web.Admin.Services;
 
 public class UserService : IUserService
 {
-    public Task<UserDto> GetUser(int id)
+    private readonly ApiContext apiContext;
+
+    public UserService(ApiContext apiContext)
     {
-        throw new NotImplementedException();
+        this.apiContext = apiContext;
+    }
+
+    public async Task<UserDto> GetUser(int id)
+    {
+        User getUser = apiContext.Users.FirstOrDefault(u => u.Id == id);
+
+        return MapUserToUserDto(getUser);
     }
 
     public Task<User> Login(LoginDto dto)
@@ -26,13 +36,42 @@ public class UserService : IUserService
         throw new NotImplementedException();
     }
 
-    public Task<List<UserDto>?> GetUserList()
+    public async Task<List<UserDto>?> GetUserList()
     {
-        throw new NotImplementedException();
+        var users = apiContext.Users;
+        List<UserDto> userDtos = new List<UserDto>();
+
+        foreach (var user in users)
+        {
+            userDtos.Add(MapUserToUserDto(user));
+        }
+
+        return userDtos;
     }
 
-    public Task DeleteUser(int id)
+    public async Task DeleteUser(int id)
     {
-        throw new NotImplementedException();
+        User deleteUser = apiContext.Users.FirstOrDefault(u => u.Id == id);
+
+        if (deleteUser != null)
+        {
+            apiContext.Users.Remove(deleteUser);
+            await apiContext.SaveChangesAsync();
+        }
+    }
+
+    private UserDto MapUserToUserDto(User user)
+    {
+        if (user == null)
+        {
+            return null;
+        }
+
+        return new UserDto()
+        {
+            Email = user.Email,
+            UserName = user.UserName,
+            UserId = user.Id,
+        };
     }
 }
