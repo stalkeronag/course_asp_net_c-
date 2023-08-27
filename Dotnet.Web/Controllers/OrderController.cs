@@ -5,6 +5,8 @@ using Dotnet.Web.Models;
 using System.Collections;
 using Microsoft.AspNetCore.Authorization;
 using Dotnet.Web.Interfaces;
+using Dotnet.Web.Admin.Exceptions;
+using Microsoft.AspNetCore.Mvc.Infrastructure;
 
 namespace Dotnet.Web.Controllers
 {
@@ -35,30 +37,47 @@ namespace Dotnet.Web.Controllers
 
         [Authorize(Roles = "Admin")]
         [HttpPut("Pay/{id}")]
-        public async void PayOrder([FromRoute] int id)
+        public IActionResult PayOrder([FromRoute] int id)
         {
-            await orderService.MoveOrderStatus(id, OrderStatus.Payed);
+            if (id > 1000)
+            {
+                return StatusCode(422);
+            }
+            return Ok(orderService.MoveOrderStatus(id, OrderStatus.Payed));
+            
         }
 
         [Authorize(Roles = "Admin")]
         [HttpPut("Ship/{id}")]
-        public async void ShipOrder([FromRoute] int id) 
+        public IActionResult ShipOrder([FromRoute] int id) 
         {
-            await orderService.MoveOrderStatus(id, OrderStatus.Payed);
+            if (id > 1000)
+            {
+                return StatusCode(422);
+            }
+            return Ok(orderService.MoveOrderStatus(id, OrderStatus.Shipped));
         }
 
         [Authorize(Roles = "Admin")]
         [HttpPut("Dispute/{id}")]
-        public async void DisputeOrder([FromRoute] int id)
+        public IActionResult DisputeOrder([FromRoute] int id)
         {
-            await orderService.MoveOrderStatus(id, OrderStatus.Payed);
+            if (id > 1000)
+            {
+                return StatusCode(422);
+            }
+            return Ok(orderService.MoveOrderStatus(id, OrderStatus.Disputed));
         }
 
         [Authorize(Roles = "Admin")]
         [HttpPut("Complete/{id}")]
-        public async void CompleteOrder([FromRoute] int id)
+        public IActionResult CompleteOrder([FromRoute] int id)
         {
-            await orderService.MoveOrderStatus(id, OrderStatus.Payed);
+            if (id > 1000)
+            {
+                return StatusCode(422);
+            }
+            return Ok(orderService.MoveOrderStatus(id, OrderStatus.Completed));
         }
 
     }

@@ -4,6 +4,10 @@ using Dotnet.Web.Models;
 using Dotnet.Web.Data;
 using Dotnet.Web.Dto;
 using Dotnet.Web.Interfaces;
+using FluentValidation.Validators;
+using FluentValidation;
+using Dotnet.Web.Admin.Exceptions;
+using System.Data;
 
 public class CommentService : ICommentService
 {
@@ -23,10 +27,6 @@ public class CommentService : ICommentService
         User user = context.Users.Where(user => user.Id == userDto.UserId).FirstOrDefault();
         Product product = context.Products.Where(product => product.Id == comment.ProductId).FirstOrDefault();
 
-        if (product == null || user == null)
-        {
-            return -1;
-        }
         
         Comment addComment = new Comment()
         {
@@ -48,13 +48,7 @@ public class CommentService : ICommentService
     public Task<CommentDto> GetComment(int id)
     {
         Comment comment = context.Comments.Where(comment => comment.Id == id).FirstOrDefault();
-        Product product= context.Products.Where(product => product.Id == id).FirstOrDefault();
-
-        
-        if (comment == null)    
-        {
-            return null;
-        }
+        Product product= context.Products.Where(product => product.Id == comment.ProductId).FirstOrDefault();
 
         CommentDto commentDto = new CommentDto()
         {
@@ -76,6 +70,8 @@ public class CommentService : ICommentService
        List<CommentDto> listCommentDto = new List<CommentDto>();
        Product product= context.Products.Where(product => product.Id == productId).FirstOrDefault();
 
+       
+
        foreach (var comment in comments)
        {
             CommentDto commentDto = new CommentDto()
@@ -94,4 +90,6 @@ public class CommentService : ICommentService
 
        return listCommentDto.AsEnumerable();
     }
+
+ 
 }

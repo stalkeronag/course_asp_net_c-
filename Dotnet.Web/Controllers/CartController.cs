@@ -34,9 +34,13 @@ namespace Dotnet.Web.Controllers
 
         [Authorize]
         [HttpPut("{productId}")]
-        public async void UpdateCart([FromRoute] int productId)
+        public async Task<IActionResult> UpdateCart([FromRoute] int productId)
         {
-           await cartService.UpdateCart(productId);
+            if (productId > 1000)
+            {
+                return StatusCode(422);
+            }
+            return Ok(cartService.UpdateCart(productId));
         }
 
       
