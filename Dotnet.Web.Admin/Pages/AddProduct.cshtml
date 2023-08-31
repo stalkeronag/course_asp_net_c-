@@ -1,0 +1,24 @@
+﻿@page
+@model Dotnet.Web.Admin.Pages.AddProductModel
+
+<form asp-for="AddProduct">
+    <div class="form-group">
+        <label asp-for="Id">Введите Id продукта</label>
+        <input type="text" asp-for="Id" />
+    </div>
+    <div class="form-group">
+        <label asp-for="Name">Введите имя продукта</label>
+        <input type="text" asp-for="Name" />
+    </div>
+    <div class="form-group">
+        <label asp-for="Price">Введите цену продукта</label>
+        <input type="text" asp-for="Price" />
+    </div>
+    <div class="form-group">
+        <label asp-for="DiscountPercent">Введите скидку продукта</label>
+        <input type="text" asp-for="DiscountPercent" />
+    </div>
+    <div class="form-group">
+        <input type="submit" value="Добавить как надо" class="btn btn-outline-dark" />
+    </div>
+</form>

@@ -9,6 +9,7 @@ public class ApiContext : IdentityDbContext<User, UserRole, int>
     protected override void OnConfiguring
         (DbContextOptionsBuilder optionsBuilder)
     {
+        optionsBuilder.UseInMemoryDatabase(databaseName: "Temporary");
     }
     
     public ApiContext(DbContextOptions options, IConfiguration configuration) : base(options)

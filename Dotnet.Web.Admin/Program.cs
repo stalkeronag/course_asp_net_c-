@@ -1,4 +1,5 @@
 using Dotnet.Web.Admin.Data;
+using Dotnet.Web.Admin.Dto;
 using Dotnet.Web.Admin.Exceptions;
 using Dotnet.Web.Admin.Interfaces;
 using Dotnet.Web.Admin.Models;
@@ -10,6 +11,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
+using System;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -23,10 +25,10 @@ builder.Services.AddControllers(options =>
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-
 builder.Services.AddDbContext<ApiContext>();
 builder.Services.AddScoped<DbContext>
     (x => x.GetService<ApiContext>()!);
+
 builder.Services.AddIdentity<User, UserRole>(config =>
     {
         config.Password.RequiredLength = 1;
@@ -40,6 +42,7 @@ builder.Services.AddIdentity<User, UserRole>(config =>
 
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IProductService, ProductService>();
+builder.Services.AddTransient<AbstractValidator<RegisterDto>, RegisterDtoValidator>();
 
 builder.Services.AddMvc();
 
@@ -61,9 +64,12 @@ builder.Services.AddSession(options =>
 builder.Services.AddMvc(option => option.EnableEndpointRouting = false).AddRazorPagesOptions(options => {
     options.Conventions.ConfigureFilter(new IgnoreAntiforgeryTokenAttribute());
 });
-
+builder.Services.AddHttpContextAccessor();
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
-    .AddCookie();
+    .AddCookie(options =>
+    {
+        options.LoginPath = "/login";
+    });
 builder.Services.AddAuthorization();
 
 var app = builder.Build();
@@ -88,5 +94,9 @@ app.UseStaticFiles();
 #pragma warning disable ASP0014
 app.UseEndpoints(endpoints => endpoints.MapRazorPages());
 #pragma warning restore ASP0014
-
+using var serviceScope = app.Services.GetRequiredService<IServiceScopeFactory>().CreateScope();
+var context = serviceScope.ServiceProvider.GetRequiredService<ApiContext>();
+DbSeeder.Seed(context,
+    serviceScope.ServiceProvider.GetRequiredService<UserManager<User>>(),
+    serviceScope.ServiceProvider.GetRequiredService<RoleManager<UserRole>>());
 app.Run();

@@ -28,20 +28,27 @@
         <Link>.dockerignore</Link>
       </Content>
       <Content Remove="codeanalysis.sarif.json" />
+      <Content Remove="Pages\ListProducts.cshtml" />
     </ItemGroup>
 
     <ItemGroup>
+      <None Include="Pages\ListProducts.cshtml" />
       <None Include="wwwroot\css\Login.css" />
     </ItemGroup>
 
     <ItemGroup>
       <_ContentIncludedByDefault Remove="Pages\Account\Login.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\ListProducts.cshtml" />
       <_ContentIncludedByDefault Remove="Pages\Product\Create.cshtml" />
       <_ContentIncludedByDefault Remove="Pages\Product\List.cshtml" />
       <_ContentIncludedByDefault Remove="Pages\Shared\_Layout.cshtml" />
       <_ContentIncludedByDefault Remove="Pages\Shared\_ValidationScriptsPartial.cshtml" />
       <_ContentIncludedByDefault Remove="Pages\User\Create.cshtml" />
       <_ContentIncludedByDefault Remove="Pages\User\List.cshtml" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <UpToDateCheckInput Remove="Pages\ListProducts.cshtml" />
     </ItemGroup>
 
 </Project>

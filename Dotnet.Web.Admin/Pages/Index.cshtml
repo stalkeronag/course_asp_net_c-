@@ -1,8 +1,22 @@
 @page
 @model Dotnet.Web.Admin.Pages.Index
 
-
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>This is simple admin app</p>
-</div>
+<h>¬ведите команду которую хотите выполнить</h>
+<h>—писок команд:</h>
+<h> DeleteUser, </h>
+<h> DeleteProduct, </h>
+<h> AddProduct, </h>
+<h> GetUser, </h>
+<h> Login, </h>
+<h> RegisterPage, </h>
+<h> ListProducts, </h>
+<h> GetUserList; </h>
+<form method="post">
+    <div class="form-group"> 
+        <label asp-for="Path">¬ведите ѕуть</label>
+        <input type="text" name="path" />
+    </div>
+    <div class="form-group">
+        <input type="submit" value="ѕереход на другую страницу" class="btn btn-outline-dark" />
+    </div>
+</form>

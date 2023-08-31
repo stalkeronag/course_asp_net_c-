@@ -16,6 +16,8 @@ using Microsoft.AspNetCore.Components.RenderTree;
 using FluentValidation;
 using Dotnet.Web.Validation;
 using Dotnet.Web.Dto;
+using Serilog.Events;
+using Serilog;
 
 static void ConfigureAuth(WebApplicationBuilder builder)
 {
@@ -50,6 +52,18 @@ static void ConfigureApi(WebApplicationBuilder builder)
     builder.Services.AddHttpContextAccessor();
     builder.Services.AddEndpointsApiExplorer();
     builder.Services.AddSwaggerGen();
+}
+
+static void ConfigureLogger(WebApplicationBuilder builder)
+{
+    Log.Logger = new LoggerConfiguration()
+        .MinimumLevel.Override("Microsoft", LogEventLevel.Warning)
+        .Enrich.FromLogContext()
+        .WriteTo.Console()
+        .WriteTo.Seq("http://localhost:5341")
+        .CreateLogger();
+    builder.Host.UseSerilog(Log.Logger);
+    builder.Services.AddSingleton(Log.Logger);
 }
 
 static void ConfigureServices(WebApplicationBuilder builder)
@@ -127,9 +141,6 @@ static void ConfigureDb(WebApplicationBuilder builder)
     builder.Services.AddScoped<DbContext>(x => x.GetRequiredService<AppDbContext>());
 }
 
-static void ConfigureLogger(WebApplicationBuilder builder)
-{
-}
 
 static void InitDb(WebApplication app)
 {
