@@ -14,5 +14,6 @@ public class UserFriendExceptionFilter : ExceptionFilterAttribute
 
     public override void OnException(ExceptionContext context)
     {
+        _logger.Warning(context.Exception.Message);
     }
 }

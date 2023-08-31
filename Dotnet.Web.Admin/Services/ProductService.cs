@@ -1,3 +1,4 @@
+using Dotnet.Web.Admin.Data;
 using Dotnet.Web.Admin.Interfaces;
 using Dotnet.Web.Admin.Models;
 
@@ -5,18 +6,40 @@ namespace Dotnet.Web.Admin.Services;
 
 public class ProductService : IProductService
 {
-    public Task<List<Product>?> GetProductList()
+    private readonly ApiContext apiContext;
+
+    public ProductService(ApiContext apiContext)
     {
-        throw new NotImplementedException();
+        this.apiContext = apiContext;
     }
 
-    public Task AddProduct(Product product)
+    public async Task<List<Product>?> GetProductList()
     {
-        throw new NotImplementedException();
+        return apiContext.Products.ToList();
     }
 
-    public Task DeleteProduct(int id)
+    public async Task AddProduct(Product product)
     {
-        throw new NotImplementedException();
+        if (product == null)
+        {
+            return;
+        }
+
+        if (!apiContext.Products.Select(product => product.Id).Contains(product.Id))
+        {
+            apiContext.Products.Add(product);
+            await apiContext.SaveChangesAsync();
+        }
+    }
+
+    public async Task DeleteProduct(int id)
+    {
+        Product deleteProduct = apiContext.Products.FirstOrDefault(p => p.Id == id);
+
+        if (deleteProduct != null)
+        {
+            apiContext.Products.Remove(deleteProduct);
+            await apiContext.SaveChangesAsync();
+        }
     }
 }

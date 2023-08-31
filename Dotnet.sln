@@ -41,7 +41,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dotnet.Console", "Dotnet.Co
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dotnet.Intro.Tests", "Dotnet.Intro.Tests\Dotnet.Intro.Tests.csproj", "{A4EDE085-AD3C-42CD-82A7-FC4ABF99113E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dotnet.Intro.Web", "Dotnet.Intro.Web\Dotnet.Intro.Web.csproj", "{115FF92E-1A4E-41C1-AEEE-9D681FD7EE22}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dotnet.Intro.Web", "Dotnet.Intro.Web\Dotnet.Intro.Web.csproj", "{115FF92E-1A4E-41C1-AEEE-9D681FD7EE22}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
